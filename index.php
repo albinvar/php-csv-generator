@@ -6,4 +6,4 @@ require 'PhpCsv.php';
 
 $object = new PhpCsv();
 $object->setCsv("test.csv");
-$object->getCsv();
+$object->createArray();
