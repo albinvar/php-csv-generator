@@ -5,6 +5,7 @@ class PhpCsv {
 	
 	private $file;
 	private $data;
+	public $resultArray;
 	
 	public function setCsv($file) {
 		
@@ -14,7 +15,7 @@ class PhpCsv {
 		
 		}
 		
-	public function createArray() {
+	private function createArray() {
 		
 		$string = $this->data;
 		$delimiter=',';
@@ -34,15 +35,14 @@ class PhpCsv {
                 $data[] = array_combine($header, $row);
             }
         }
-
-var_dump($data);
-		
+        $this->resultArray = $data;
+        return $this->resultArray;
+        
 		}
 	
-	public function getCsv() {
+	public function getArray() {
 		
-		
-
+		return var_dump($this->createArray());
 		
 		}
 	};
