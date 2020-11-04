@@ -3,7 +3,13 @@
 
 class PhpCsv {
 	
-	public function getCsv() {
+	private $csv;
+	
+	public function setCsv($file) {
+		
+		$data = file_get_contents($file);
+		$csv = str_getcsv($data);
+		$this->csv = $csv;
 		
 		}
 		
@@ -12,5 +18,10 @@ class PhpCsv {
 		
 		}
 	
-	
+	public function getCsv() {
+		
+		var_dump($this->csv);
+
+		
+		}
 	};
