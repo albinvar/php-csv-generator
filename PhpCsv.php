@@ -15,6 +15,13 @@ class PhpCsv {
 		
 		}
 		
+	public function setArray($array) {
+		
+	$this->setArray = $array;
+	
+		
+		}
+		
 	private function createArray() {
 		
 		$string = $this->data;
@@ -40,9 +47,40 @@ class PhpCsv {
         
 		}
 	
+	public function createCsv($array) {
+	
+	
+	$pathToGenerate = 'array.csv'; 
+    $header=null;
+    $createFile = fopen($pathToGenerate,"w+");
+	 
+    foreach ($array as $row) {
+
+        if(!$header) {
+
+            fputcsv($createFile,array_keys($row));
+            fputcsv($createFile, $row);  
+            $header = true;
+        }
+        else {
+
+            fputcsv($createFile, $row);
+        }
+    }
+    fclose($createFile);
+	echo "success";
+	}
+	
 	public function getArray() {
 		
-		return var_dump($this->createArray());
+		return $this->createArray();
 		
 		}
+		
+	public function getCsv($array) {
+		
+		return $this->createCsv($array);
+		
+		}
+	
 	};
