@@ -22,28 +22,27 @@ class PhpCsv {
 		
 		}
 		
-	private function createArray() {
+	public function createArray() {
 		
 		$string = $this->data;
 		$delimiter=',';
 		$header = NULL;
         $data = [];
         $rows = explode(PHP_EOL, $string); 
-        foreach($rows as $row_str) {
-            $row = str_getcsv($row_str);
-            if(!$header)
-            {
-               $header = $row;
-            }
-            else
-            {
-                if(count($header)!=count($row)){ continue; }
+        $header = $rows[0];//creates a copy of csv header array
+unset($rows[0]);//removes the header from $csv_data since no longer needed
+foreach($rows as $row){
+	var_dump($header);
+	var_dump($row);
+    $row = array_combine($header, $row);// adds header to each row as key
+    var_dump($row);//do something here with each row
+}
+//foreach($records as $test) {
+            //var_dump($element);
+            //$test[] = array_combine($header, $element);
 
-                $data[] = array_combine($header, $row);
-            }
-        }
-        $this->resultArray = $data;
-        return $this->resultArray;
+//}
+
         
 		}
 	
