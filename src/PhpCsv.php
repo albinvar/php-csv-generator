@@ -14,9 +14,8 @@ class PhpCsv
 	{
 		$this->file = $file;
 		$data = file_get_contents($file);
-		var_dump($data);
+		$this->parseCsv($data);
 	}
-	
 	
 	public function setArray($array)
 	{
@@ -31,6 +30,15 @@ class PhpCsv
 	public function createCsv()
 	{
 		//
+	}
+	
+	private function parseCsv($data)
+	{
+		$delimiterBreak = PHP_EOL;
+		$delimiter = ',';
+		
+		$lines = explode($delimiterBreak, $data);
+		var_dump($lines);
 	}
 	
 	private function jsonEncoder($data)
