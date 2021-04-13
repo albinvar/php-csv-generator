@@ -36,9 +36,15 @@ class PhpCsv
 	{
 		$delimiterBreak = PHP_EOL;
 		$delimiter = ',';
+		$array =[];
 		
 		$lines = explode($delimiterBreak, $data);
-		var_dump($lines);
+		
+		foreach($lines as $line)
+		{
+			$array[] = explode($delimiter, $line);
+		}
+		var_dump($array);
 	}
 	
 	private function jsonEncoder($data)
