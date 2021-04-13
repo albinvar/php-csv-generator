@@ -7,5 +7,14 @@
             "email": "albin8285@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
 }

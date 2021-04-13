@@ -1,5 +1,6 @@
 <?php
-//php-csv class
+
+namespace App;
 
 class PhpCsv {
 	
