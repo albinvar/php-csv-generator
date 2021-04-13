@@ -12,10 +12,9 @@ class PhpCsv
 	
 	public function setCsv($file)
 	{
-		$data = file_get_contents($file);
-		
 		$this->file = $file;
-		$this->data = $data;
+		$data = file_get_contents($file);
+		var_dump($data);
 	}
 	
 	
@@ -36,12 +35,14 @@ class PhpCsv
 	
 	private function jsonEncoder($data)
 	{
-		//
+		$encoded = json_decode($data);
+		return $encoded;
 	}
 	
 	private function jsonDecoder($data)
 	{
-		//
+		$decoded = json_decode($data);
+		return $decoded;
 	}
 	
 }
