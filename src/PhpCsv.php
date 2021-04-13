@@ -24,4 +24,24 @@ class PhpCsv
 		$this->setArray = $array;
 	}
 	
+	public function createArray()
+	{
+		//
+	}
+	
+	public function createCsv()
+	{
+		//
+	}
+	
+	private function jsonEncoder($data)
+	{
+		//
+	}
+	
+	private function jsonDecoder($data)
+	{
+		//
+	}
+	
 }
