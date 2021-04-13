@@ -1,0 +1,11 @@
+{
+    "name": "albinvar/php-csv-generator",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Albin Varghese",
+            "email": "albin8285@gmail.com"
+        }
+    ],
+    "require": {}
+}
