@@ -15,6 +15,8 @@ class PhpCsv
 		$this->file = $file;
 		$data = file_get_contents($file);
 		$this->parseCsv($data);
+		echo $this->jsonEncoder($this->array);
+		
 	}
 	
 	public function setArray($array)
@@ -44,12 +46,17 @@ class PhpCsv
 		{
 			$array[] = explode($delimiter, $line);
 		}
-		var_dump($array);
+		
+		$header = $array[0];
+		unset($array[0]);
+		$array = ['header' => $header, 'body' => $array];
+		
+		$this->array = $array;
 	}
 	
 	private function jsonEncoder($data)
 	{
-		$encoded = json_decode($data);
+		$encoded = json_encode($data);
 		return $encoded;
 	}
 	
