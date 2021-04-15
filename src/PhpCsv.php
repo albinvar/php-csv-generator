@@ -102,17 +102,22 @@ class PhpCsv
 		$this->array = $array;
 	}
 	
-	public function exportJson($fileName, $type=true)
+	public function exportJson($fileName=null, $type=true)
 	{
 		if(isset($this->array)) { $data = $this->array; }
 		$encoded = json_encode($data, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
 		
-		$file = fopen($fileName, "w") or die("Unable to open file!");
-		fwrite($file, $encoded);
-		fclose($file);
+		if($fileName == null)
+		{
+			return $encoded;
+		} else {
+			$file = fopen($fileName, "w") or die("Unable to open file!");
+			fwrite($file, $encoded);
+			fclose($file);
 		if($type === true)
 		{
 			return $this->downloadStream($fileName);
+		}
 		}
 	}
 	
