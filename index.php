@@ -15,5 +15,7 @@ $array = [
 $object = new PhpCsv();
 $object->setArray($array);
 $object->createCsv();
-$object->exportCsv('test2.csv');
+echo $object->exportJson('test.json', false);
+
+//$object->exportCsv('test2.csv');
 

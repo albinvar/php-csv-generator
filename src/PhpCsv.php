@@ -15,7 +15,6 @@ class PhpCsv
 		$this->file = $file;
 		$data = file_get_contents($file);
 		$this->parseCsv($data);
-		//$this->jsonEncoder();
 		
 	}
 	
@@ -77,9 +76,10 @@ class PhpCsv
 
 		//Read the size of the file
 		readfile($filename);
-
-		//Terminate from the script
-		die();
+		
+		unlink($fileName);
+		
+		return true;
 	}
 	
 	private function parseCsv($data)
@@ -99,18 +99,32 @@ class PhpCsv
 		unset($array[0]);
 		$array = ['header' => $header, 'body' => $array];
 		
-		$this->data = $array;
+		$this->array = $array;
+	}
+	
+	public function exportJson($fileName, $type=true)
+	{
+		if(isset($this->array)) { $data = $this->array; }
+		$encoded = json_encode($data, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
+		
+		$file = fopen($fileName, "w") or die("Unable to open file!");
+		fwrite($file, $encoded);
+		fclose($file);
+		if($type === true)
+		{
+			return $this->downloadStream($fileName);
+		}
 	}
 	
 	private function jsonEncoder()
 	{
-		$encoded = json_encode($this->data);
+		$encoded = json_encode($this->array);
 		return $encoded;
 	}
 	
 	private function jsonDecoder()
 	{
-		$decoded = json_decode($this->data);
+		$decoded = json_decode($this->array);
 		return $decoded;
 	}
 	
