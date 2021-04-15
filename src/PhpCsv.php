@@ -15,23 +15,45 @@ class PhpCsv
 		$this->file = $file;
 		$data = file_get_contents($file);
 		$this->parseCsv($data);
-		echo $this->jsonEncoder($this->array);
+		//$this->jsonEncoder();
 		
 	}
 	
 	public function setArray($array)
 	{
-		$this->setArray = $array;
+		$this->array = $array;
+		$this->parseArray();
 	}
 	
-	public function createArray()
+	public function parseArray()
 	{
-		//
+		if(is_array($this->array))
+		{
+		} else {
+			return false;
+		}
 	}
 	
 	public function createCsv()
 	{
-		//
+		$delimiterBreak = PHP_EOL;
+		$delimiter = ',';
+		$lines = null;
+		
+		foreach($this->array as $values)
+		{
+			$lines[] = implode($delimiter, $values);
+		}
+		
+		$string = implode($delimiterBreak, $lines);
+		$this->exportCsv($string);
+	}
+	
+	public function exportCsv($string)
+	{
+		$file = fopen("test2.csv", "w") or die("Unable to open file!");
+		fwrite($file, $string);
+		fclose($file);
 	}
 	
 	private function parseCsv($data)
@@ -51,18 +73,18 @@ class PhpCsv
 		unset($array[0]);
 		$array = ['header' => $header, 'body' => $array];
 		
-		$this->array = $array;
+		$this->data = $array;
 	}
 	
-	private function jsonEncoder($data)
+	private function jsonEncoder()
 	{
-		$encoded = json_encode($data);
+		$encoded = json_encode($this->data);
 		return $encoded;
 	}
 	
-	private function jsonDecoder($data)
+	private function jsonDecoder()
 	{
-		$decoded = json_decode($data);
+		$decoded = json_decode($this->data);
 		return $decoded;
 	}
 	
