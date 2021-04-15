@@ -45,14 +45,14 @@ class PhpCsv
 			$lines[] = implode($delimiter, $values);
 		}
 		
-		$string = implode($delimiterBreak, $lines);
-		$this->exportCsv($string);
+		$this->string = implode($delimiterBreak, $lines);
+		return $this->string;
 	}
 	
-	public function exportCsv($string)
+	public function exportCsv($fileName)
 	{
-		$file = fopen("test2.csv", "w") or die("Unable to open file!");
-		fwrite($file, $string);
+		$file = fopen($fileName, "w") or die("Unable to open file!");
+		fwrite($file, $this->string);
 		fclose($file);
 	}
 	
