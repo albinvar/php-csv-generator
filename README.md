@@ -59,6 +59,50 @@ composer update albinvar/php-csv-class
 - Export CSV file & save to preferred location
 - Export CSV file & Stream to browser
 
+## CSV to Array
+
+You can convert a csv file to an array using the following example.
+
+```php
+<?php
+
+use App\PhpCsv;
+
+require_once("./vendor/autoload.php");
+
+$object = new PhpCsv();
+$object->setCsv('data.csv');
+$array = $object->createArray();
+
+var_dump($array);
+```
+
+## Array to CSV
+
+You can convert an array into a csv file using the following example.
+
+```php
+<?php
+
+use App\PhpCsv;
+
+require_once("./vendor/autoload.php");
+
+$array = [ 
+	['Name', 'Class'],
+	['John', 28],
+	['Johana', 23],
+	['Adam', 32],
+];
+
+
+$object = new PhpCsv();
+$object->setArray($array);
+$object->createCsv();
+$object->exportCsv('data.csv', true);
+
+```
+
 ## Contributing
 
 ## License
