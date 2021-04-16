@@ -1,6 +1,6 @@
 <?php
 
-use App\PhpCsv;
+use PhpCsv\Generator;
 
 require_once("./vendor/autoload.php");
 
@@ -12,7 +12,7 @@ $array = [
 ];
 
 
-$object = new PhpCsv();
+$object = new Generator();
 $object->setArray($array);
 $object->createCsv();
 echo $object->exportJson();

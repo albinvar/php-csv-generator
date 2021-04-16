@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace PhpCsv;
 
-class PhpCsv
+class Generator
 {
     public function __construct()
     {
