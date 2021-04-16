@@ -1,8 +1,7 @@
-<h1 align="center"> Php-Csv Class </h1> 
+<h1 align="center"> Php-Csv Generator</h1> 
 
 
-## Table of Contents
-
+## Table of Contents 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Features](#features)
