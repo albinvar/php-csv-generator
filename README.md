@@ -95,7 +95,6 @@ $array = [
 	['Adam', 32],
 ];
 
-
 $object = new PhpCsv();
 $object->setArray($array);
 $object->createCsv();
@@ -103,7 +102,27 @@ $object->exportCsv('data.csv', true);
 
 ```
 
+```$object->exportCsv('data.csv', true);``` The first argument excepts the filenams and 2nd argument excepts the download type which expects a boolean format.
+
+## Export to JSON format
+
+You can export to JSON from both CSV or Array
+The first argument excepts the filenams and 2nd argument excepts the download type which expects a boolean format.
+
+```php
+// returns json string
+echo $object->exportJson();
+
+// creates json file and download to browser
+$object->exportJson('data.json', true);
+
+// creates json file and saves it to specific location.
+$object->exportJson('data.json', false);
+```
+
 ## Contributing
+
+Pulk requests are always welcome...
 
 ## License
 MIT. See [LICENSE](LICENSE) for more details.
