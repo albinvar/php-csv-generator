@@ -16,7 +16,7 @@ A simple php library used to generate php array to csv, json and csv to php arra
 ## Installation
 
 ```php
-composer require albinvar/php-csv
+composer require albinvar/php-csv-generator
 ```
 
 Attach the library to your php code.
@@ -24,11 +24,11 @@ Attach the library to your php code.
 ```php
 <?php
 
-use App\PhpCsv;
+use PhpCsv\Generator;
 
 require_once("./vendor/autoload.php");
 
-$obj = new PhpCsv();
+$obj = new Generator();
 
 ```
 
@@ -40,14 +40,14 @@ $obj = new PhpCsv();
 ```php
 <?php
 
-require_once "PhpCsv.php";
+require_once "Generator.php";
 
 ```
 
 ## Updation
 
 ```php
-composer update albinvar/php-csv-class
+composer update albinvar/php-csv-generator
 ```
 
 ## Features
@@ -66,11 +66,11 @@ You can convert a csv file to an array using the following example.
 ```php
 <?php
 
-use App\PhpCsv;
+use PhpCsv\Generator;
 
 require_once("./vendor/autoload.php");
 
-$object = new PhpCsv();
+$object = new Generator();
 $object->setCsv('data.csv');
 $array = $object->createArray();
 
@@ -84,7 +84,7 @@ You can convert an array into a csv file using the following example.
 ```php
 <?php
 
-use App\PhpCsv;
+use PhpCsv\Generator;
 
 require_once("./vendor/autoload.php");
 
@@ -95,7 +95,7 @@ $array = [
 	['Adam', 32],
 ];
 
-$object = new PhpCsv();
+$object = new Generator();
 $object->setArray($array);
 $object->createCsv();
 $object->exportCsv('data.csv', true);
@@ -122,7 +122,7 @@ $object->exportJson('data.json', false);
 
 ## Contributing
 
-Pulk requests are always welcome...
+Pull requests are always welcome...
 
 ## License
 MIT. See [LICENSE](LICENSE) for more details.
