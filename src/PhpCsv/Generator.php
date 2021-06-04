@@ -18,8 +18,6 @@ class Generator
     
     public function setArray($columns, $array)
     {
-    	
-    
     	$this->columns = $columns;
         $this->array = $array;
         $this->parseArray();
@@ -27,6 +25,7 @@ class Generator
     
     public function parseArray()
     {
+    	$this->validateArray();
         if (is_array($this->array)) {
         } else {
             return false;
@@ -97,6 +96,18 @@ class Generator
         $array = ['header' => $header, 'body' => $array];
         
         $this->array = $array;
+    }
+    
+    private function validateArray()
+    {
+		$elementCount = array_map('count', $this->array);
+		
+		$count = array_sum($elementCount) % count($this->columns);
+		if($count !== 0)
+		{
+			throw new \Exception("The type of array is invalid.");
+		}
+		return true;
     }
     
     public function exportJson($fileName=null, $type=true)
