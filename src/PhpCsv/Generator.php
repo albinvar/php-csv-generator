@@ -16,7 +16,7 @@ class Generator
         $this->parseCsv($data);
     }
     
-    public function setArray(Array $columns, Array $array)
+    public function setArray(Array $array, Array $columns=null)
     {
     	$this->columns = $columns;
         $this->array = $array;
@@ -101,14 +101,25 @@ class Generator
     
     private function validateArray()
     {
-    	if (!is_array($this->array) && !is_array($this->columns))
+    	//check if property columns is null.
+    	if(is_null($this->columns))
+	    {
+			$columnCount = count($this->array);
+		} elseif(!is_array($this->columns)) {
+			throw new \Exception("Columns must be an array");
+		} else {
+			$columnCount = count($this->columns);
+		}
+		
+		//check if array is an array.
+    	if (!is_array($this->array))
 	    {
 			throw new \Exception("Recived parameter is not an array");
-		}
+		} 
 		
 		$elementCount = array_map('count', $this->array);
 		
-		$count = array_sum($elementCount) % count($this->columns);
+		$count = array_sum($elementCount) % $columnCount;
 		if($count !== 0)
 		{
 			throw new \Exception("The type of array is invalid.");
