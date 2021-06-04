@@ -16,7 +16,7 @@ class Generator
         $this->parseCsv($data);
     }
     
-    public function setArray($columns, $array)
+    public function setArray(Array $columns, Array $array)
     {
     	$this->columns = $columns;
         $this->array = $array;
@@ -30,6 +30,11 @@ class Generator
     
     public function createCsv()
     {
+    	if(!isset($this->array) && !isset($this->columns))
+	    {
+			throw new \Exception("Array isn't setted");
+		}
+		
         $delimiterBreak = PHP_EOL;
         $delimiter = ',';
         $lines = null;
@@ -108,6 +113,7 @@ class Generator
 		{
 			throw new \Exception("The type of array is invalid.");
 		}
+		
 		return true;
     }
     
