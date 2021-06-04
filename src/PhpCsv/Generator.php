@@ -50,14 +50,23 @@ class Generator
             $lines[] = implode($delimiter, $values);
         }
         
-        $this->string = implode($delimiterBreak, $lines);
-        return $this->string;
+        $this->csv = implode($delimiterBreak, $lines);
+    }
+    
+    public function getCsv()
+    {
+    	if(!isset($this->csv))
+	    {
+			throw new \Exception('Please convert the data to csv first.');
+		}
+	    
+		return $this->csv;
     }
     
     public function exportCsv($fileName, $type=true)
     {
         $file = fopen($fileName, "w") or die("Unable to open file!");
-        fwrite($file, $this->string);
+        fwrite($file, $this->csv);
         fclose($file);
         if ($type === true) {
             $this->downloadStream($fileName);
