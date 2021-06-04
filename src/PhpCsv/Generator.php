@@ -35,7 +35,6 @@ class Generator
         }
         
 	    $data = file_get_contents($this->file);
-        
         $this->parseCsv($data);
     }
     
@@ -138,6 +137,11 @@ class Generator
         $this->array = $array;
         
         return true;
+    }
+    
+    public function getArray()
+    {
+	    return $this->array;	
     }
     
     private function validateArray()

@@ -13,12 +13,15 @@ $array = [
 
 
 $object = new Generator();
-$object->setArray($array, $columns);
-$object->makeCsv();
-echo $object->getCsv();
-echo $object->exportJson();
+//$object->setArray($array, $columns);
+//$object->makeCsv();
+//echo $object->getCsv();
+//echo $object->exportJson();
 
 
-$object->setCsvFile('test.txt');
+$object->setCsvFile('test.csv');
+$array = $object->getArray();
+
+//var_dump($array);
 
 //$object->exportCsv('test2.csv');
