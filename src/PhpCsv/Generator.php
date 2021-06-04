@@ -26,10 +26,6 @@ class Generator
     public function parseArray()
     {
     	$this->validateArray();
-        if (is_array($this->array)) {
-        } else {
-            return false;
-        }
     }
     
     public function createCsv()
@@ -100,6 +96,11 @@ class Generator
     
     private function validateArray()
     {
+    	if (!is_array($this->array) && !is_array($this->columns))
+	    {
+			throw new \Exception("Recived parameter is not an array");
+		}
+		
 		$elementCount = array_map('count', $this->array);
 		
 		$count = array_sum($elementCount) % count($this->columns);
