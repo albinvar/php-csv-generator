@@ -58,6 +58,35 @@ composer update albinvar/php-csv-generator
 - Export CSV file & save to preferred location
 - Export CSV file & Stream to browser
 
+## Array to CSV
+
+You can convert an array into a csv file using the following example.
+
+```php
+<?php
+
+use PhpCsv\Generator;
+
+require_once("./vendor/autoload.php");
+
+$columns = ['Name', 'Age'];
+$array = [ 
+	['John', 28],
+	['Johana', 23],
+	['Adam', 32],
+];
+
+$object = new Generator();
+$object->setArray($array, $columns);
+$object->makeCsv();
+$object->getCsv(); //(Optional) Get CSV as a string.
+$object->exportCsv('data.csv', true);
+
+```
+
+```$object->exportCsv('data.csv', true);``` The first argument excepts the filenams and 2nd argument excepts the download type which expects a boolean format.
+
+
 ## CSV to Array
 
 You can convert a csv file to an array using the following example.
@@ -75,33 +104,6 @@ $array = $object->createArray();
 
 var_dump($array);
 ```
-
-## Array to CSV
-
-You can convert an array into a csv file using the following example.
-
-```php
-<?php
-
-use PhpCsv\Generator;
-
-require_once("./vendor/autoload.php");
-
-$array = [ 
-	['Name', 'Class'],
-	['John', 28],
-	['Johana', 23],
-	['Adam', 32],
-];
-
-$object = new Generator();
-$object->setArray($array);
-$object->createCsv();
-$object->exportCsv('data.csv', true);
-
-```
-
-```$object->exportCsv('data.csv', true);``` The first argument excepts the filenams and 2nd argument excepts the download type which expects a boolean format.
 
 ## Export to JSON format
 
