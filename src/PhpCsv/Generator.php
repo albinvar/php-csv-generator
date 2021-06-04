@@ -42,13 +42,10 @@ class Generator
         if(isset($this->columns))
         {
         	$columns = [$this->columns];
-	        $array = $this->array;
-	        array_splice($array, 0, 0, $columns);
-        } else {
-        	$array = $this->array;
+	        array_splice($this->array, 0, 0, $columns);
         }
         
-        foreach ($array as $values)
+        foreach($this->array as $values)
         {
             $lines[] = implode($delimiter, $values);
         }
