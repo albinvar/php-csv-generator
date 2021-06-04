@@ -1,5 +1,11 @@
 <h1 align="center"> Php-Csv Generator</h1> 
 
+<p align="center">
+<img src="https://img.shields.io/packagist/v/albinvar/php-csv-generator?label=version">
+<img src="https://poser.pugx.org/albinvar/php-csv-generator/downloads">
+<img src="https://img.shields.io/github/repo-size/albinvar/php-csv-generator">
+<a href="LICENSE"><img src="https://img.shields.io/apm/l/Github"></a>
+</p>
 
 ## Table of Contents 
 - [Introduction](#introduction)
