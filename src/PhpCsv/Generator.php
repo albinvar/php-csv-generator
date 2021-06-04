@@ -16,8 +16,11 @@ class Generator
         $this->parseCsv($data);
     }
     
-    public function setArray($array)
+    public function setArray($columns, $array)
     {
+    	
+    
+    	$this->columns = $columns;
         $this->array = $array;
         $this->parseArray();
     }
