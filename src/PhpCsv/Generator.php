@@ -4,6 +4,16 @@ namespace PhpCsv;
 
 class Generator
 {
+	
+	protected $array;
+	
+	protected $columns;
+	
+	protected $csv;
+	
+	protected $delimiter = ',';
+	
+	
     public function __construct()
     {
         //
@@ -36,7 +46,6 @@ class Generator
 		}
 		
         $delimiterBreak = PHP_EOL;
-        $delimiter = ',';
         $lines = null;
         
         if(isset($this->columns))
@@ -47,7 +56,7 @@ class Generator
         
         foreach($this->array as $values)
         {
-            $lines[] = implode($delimiter, $values);
+            $lines[] = implode($this->delimiter, $values);
         }
         
         $this->csv = implode($delimiterBreak, $lines);
