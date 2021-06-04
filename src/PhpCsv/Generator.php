@@ -4,16 +4,15 @@ namespace PhpCsv;
 
 class Generator
 {
-	
-	protected $array;
-	
-	protected $columns;
-	
-	protected $csv;
-	
-	protected $delimiter = ',';
-	
-	
+    protected $array;
+    
+    protected $columns;
+    
+    protected $csv;
+    
+    protected $delimiter = ',';
+    
+    
     public function __construct()
     {
         //
@@ -21,7 +20,7 @@ class Generator
     
     public function setCsv(String $data)
     {
-    	$this->csv = $data;
+        $this->csv = $data;
         $this->parseCsv($data);
     }
     
@@ -29,45 +28,41 @@ class Generator
     {
         $this->file = $filename;
         
-        if(!file_exists($this->file))
-        {
-        	throw new \Exception('Failed to read contents on file');
+        if (!file_exists($this->file)) {
+            throw new \Exception('Failed to read contents on file');
         }
         
-	    $data = file_get_contents($this->file);
+        $data = file_get_contents($this->file);
         $this->parseCsv($data);
     }
     
-    public function setArray(Array $array, Array $columns=null)
+    public function setArray(array $array, array $columns=null)
     {
-    	$this->columns = $columns;
+        $this->columns = $columns;
         $this->array = $array;
         $this->parseArray();
     }
     
     public function parseArray()
     {
-    	$this->validateArray();
+        $this->validateArray();
     }
     
     public function makeCsv()
     {
-    	if(!isset($this->array) && !isset($this->columns))
-	    {
-			throw new \Exception("Properties not correctly assigned");
-		}
-		
+        if (!isset($this->array) && !isset($this->columns)) {
+            throw new \Exception("Properties not correctly assigned");
+        }
+        
         $delimiterBreak = PHP_EOL;
         $lines = null;
         
-        if(isset($this->columns))
-        {
-        	$columns = [$this->columns];
-	        array_splice($this->array, 0, 0, $columns);
+        if (isset($this->columns)) {
+            $columns = [$this->columns];
+            array_splice($this->array, 0, 0, $columns);
         }
         
-        foreach($this->array as $values)
-        {
+        foreach ($this->array as $values) {
             $lines[] = implode($this->delimiter, $values);
         }
         
@@ -78,12 +73,11 @@ class Generator
     
     public function getCsv()
     {
-    	if(!isset($this->csv))
-	    {
-			throw new \Exception('Please convert the data to csv first.');
-		}
-	    
-		return $this->csv;
+        if (!isset($this->csv)) {
+            throw new \Exception('Please convert the data to csv first.');
+        }
+        
+        return $this->csv;
     }
     
     public function exportCsv($fileName, $type=true)
@@ -141,36 +135,33 @@ class Generator
     
     public function getArray()
     {
-	    return $this->array;	
+        return $this->array;
     }
     
     private function validateArray()
     {
-    	//check if property columns is null.
-    	if(is_null($this->columns))
-	    {
-			$columnCount = count($this->array);
-		} elseif(!is_array($this->columns)) {
-			throw new \Exception("Columns must be an array");
-		} else {
-			$columnCount = count($this->columns);
-		}
-		
-		//check if array is an array.
-    	if (!is_array($this->array))
-	    {
-			throw new \Exception("Recived parameter is not an array");
-		} 
-		
-		$elementCount = array_map('count', $this->array);
-		
-		$count = array_sum($elementCount) % $columnCount;
-		if($count !== 0)
-		{
-			throw new \Exception("The type of array is invalid.");
-		}
-		
-		return true;
+        //check if property columns is null.
+        if (is_null($this->columns)) {
+            $columnCount = count($this->array);
+        } elseif (!is_array($this->columns)) {
+            throw new \Exception("Columns must be an array");
+        } else {
+            $columnCount = count($this->columns);
+        }
+        
+        //check if array is an array.
+        if (!is_array($this->array)) {
+            throw new \Exception("Recived parameter is not an array");
+        }
+        
+        $elementCount = array_map('count', $this->array);
+        
+        $count = array_sum($elementCount) % $columnCount;
+        if ($count !== 0) {
+            throw new \Exception("The type of array is invalid.");
+        }
+        
+        return true;
     }
     
     public function exportJson($fileName=null, $type=true)
