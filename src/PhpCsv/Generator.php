@@ -60,6 +60,8 @@ class Generator
         }
         
         $this->csv = implode($delimiterBreak, $lines);
+        
+        return true;
     }
     
     public function getCsv()
@@ -108,13 +110,12 @@ class Generator
     private function parseCsv($data)
     {
         $delimiterBreak = PHP_EOL;
-        $delimiter = ',';
         $array =[];
         
         $lines = explode($delimiterBreak, $data);
         
         foreach ($lines as $line) {
-            $array[] = explode($delimiter, $line);
+            $array[] = explode($this->delimiter, $line);
         }
         
         $header = $array[0];
@@ -122,6 +123,8 @@ class Generator
         $array = ['header' => $header, 'body' => $array];
         
         $this->array = $array;
+        
+        return true;
     }
     
     private function validateArray()
