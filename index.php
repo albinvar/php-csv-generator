@@ -18,4 +18,7 @@ $object->makeCsv();
 echo $object->getCsv();
 echo $object->exportJson();
 
+
+$object->setCsvFile('test.txt');
+
 //$object->exportCsv('test2.csv');

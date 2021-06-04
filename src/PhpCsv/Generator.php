@@ -19,10 +19,23 @@ class Generator
         //
     }
     
-    public function setCsv($file)
+    public function setCsv(String $data)
     {
-        $this->file = $file;
-        $data = file_get_contents($file);
+    	$this->csv = $data;
+        $this->parseCsv($data);
+    }
+    
+    public function setCsvFile(String $filename)
+    {
+        $this->file = $filename;
+        
+        if(!file_exists($this->file))
+        {
+        	throw new \Exception('Failed to read contents on file');
+        }
+        
+	    $data = file_get_contents($this->file);
+        
         $this->parseCsv($data);
     }
     
