@@ -41,14 +41,12 @@ class Generator
         
         if(isset($this->columns))
         {
-        	$array = [$this->columns];
-	        $array += $this->array;
+        	$columns = [$this->columns];
+	        $array = $this->array;
+	        array_splice($array, 0, 0, $columns);
         } else {
         	$array = $this->array;
         }
-        
-        var_dump($array);
-        die();
         
         foreach ($array as $values)
         {
