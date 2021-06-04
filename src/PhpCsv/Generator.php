@@ -4,50 +4,93 @@ namespace PhpCsv;
 
 class Generator
 {
+	
+	protected $array;
+	
+	protected $columns;
+	
+	protected $csv;
+	
+	protected $delimiter = ',';
+	
+	
     public function __construct()
     {
         //
     }
     
-    public function setCsv($file)
+    public function setCsv(String $data)
     {
-        $this->file = $file;
-        $data = file_get_contents($file);
+    	$this->csv = $data;
         $this->parseCsv($data);
     }
     
-    public function setArray($array)
+    public function setCsvFile(String $filename)
     {
+        $this->file = $filename;
+        
+        if(!file_exists($this->file))
+        {
+        	throw new \Exception('Failed to read contents on file');
+        }
+        
+	    $data = file_get_contents($this->file);
+        
+        $this->parseCsv($data);
+    }
+    
+    public function setArray(Array $array, Array $columns=null)
+    {
+    	$this->columns = $columns;
         $this->array = $array;
         $this->parseArray();
     }
     
     public function parseArray()
     {
-        if (is_array($this->array)) {
-        } else {
-            return false;
-        }
+    	$this->validateArray();
     }
     
-    public function createCsv()
+    public function makeCsv()
     {
+    	if(!isset($this->array) && !isset($this->columns))
+	    {
+			throw new \Exception("Properties not correctly assigned");
+		}
+		
         $delimiterBreak = PHP_EOL;
-        $delimiter = ',';
         $lines = null;
         
-        foreach ($this->array as $values) {
-            $lines[] = implode($delimiter, $values);
+        if(isset($this->columns))
+        {
+        	$columns = [$this->columns];
+	        array_splice($this->array, 0, 0, $columns);
         }
         
-        $this->string = implode($delimiterBreak, $lines);
-        return $this->string;
+        foreach($this->array as $values)
+        {
+            $lines[] = implode($this->delimiter, $values);
+        }
+        
+        $this->csv = implode($delimiterBreak, $lines);
+        
+        return true;
+    }
+    
+    public function getCsv()
+    {
+    	if(!isset($this->csv))
+	    {
+			throw new \Exception('Please convert the data to csv first.');
+		}
+	    
+		return $this->csv;
     }
     
     public function exportCsv($fileName, $type=true)
     {
         $file = fopen($fileName, "w") or die("Unable to open file!");
-        fwrite($file, $this->string);
+        fwrite($file, $this->csv);
         fclose($file);
         if ($type === true) {
             $this->downloadStream($fileName);
@@ -80,13 +123,12 @@ class Generator
     private function parseCsv($data)
     {
         $delimiterBreak = PHP_EOL;
-        $delimiter = ',';
         $array =[];
         
         $lines = explode($delimiterBreak, $data);
         
         foreach ($lines as $line) {
-            $array[] = explode($delimiter, $line);
+            $array[] = explode($this->delimiter, $line);
         }
         
         $header = $array[0];
@@ -94,6 +136,37 @@ class Generator
         $array = ['header' => $header, 'body' => $array];
         
         $this->array = $array;
+        
+        return true;
+    }
+    
+    private function validateArray()
+    {
+    	//check if property columns is null.
+    	if(is_null($this->columns))
+	    {
+			$columnCount = count($this->array);
+		} elseif(!is_array($this->columns)) {
+			throw new \Exception("Columns must be an array");
+		} else {
+			$columnCount = count($this->columns);
+		}
+		
+		//check if array is an array.
+    	if (!is_array($this->array))
+	    {
+			throw new \Exception("Recived parameter is not an array");
+		} 
+		
+		$elementCount = array_map('count', $this->array);
+		
+		$count = array_sum($elementCount) % $columnCount;
+		if($count !== 0)
+		{
+			throw new \Exception("The type of array is invalid.");
+		}
+		
+		return true;
     }
     
     public function exportJson($fileName=null, $type=true)
