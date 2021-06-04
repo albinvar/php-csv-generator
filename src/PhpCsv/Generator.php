@@ -28,18 +28,30 @@ class Generator
     	$this->validateArray();
     }
     
-    public function createCsv()
+    public function makeCsv()
     {
     	if(!isset($this->array) && !isset($this->columns))
 	    {
-			throw new \Exception("Array isn't setted");
+			throw new \Exception("Properties not correctly assigned");
 		}
 		
         $delimiterBreak = PHP_EOL;
         $delimiter = ',';
         $lines = null;
         
-        foreach ($this->array as $values) {
+        if(isset($this->columns))
+        {
+        	$array = [$this->columns];
+	        $array += $this->array;
+        } else {
+        	$array = $this->array;
+        }
+        
+        var_dump($array);
+        die();
+        
+        foreach ($array as $values)
+        {
             $lines[] = implode($delimiter, $values);
         }
         
