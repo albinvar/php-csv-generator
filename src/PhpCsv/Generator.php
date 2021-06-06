@@ -192,9 +192,8 @@ class Generator
     {
         $array = json_decode($this->json, true);
         
-        if(is_null($array))
-        {
-        	throw new \Exception('Invalid JSON file.');
+        if (is_null($array)) {
+            throw new \Exception('Invalid JSON file.');
         }
       
         $this->array = $array;
