@@ -60,6 +60,7 @@ composer update albinvar/php-csv-generator
 - Convert CSV to php array
 - Convert array to CSV format
 - Convert array & CSV to json
+- Import JSON and Convert to array.
 - Export JSON format and save or stream json file
 - Export CSV file & save to preferred location
 - Export CSV file & Stream to browser
@@ -105,7 +106,25 @@ use PhpCsv\Generator;
 require_once("./vendor/autoload.php");
 
 $object = new Generator();
-$object->setCsv('data.csv');
+$object->importCsv('data.csv');
+$array = $object->getArray();
+
+var_dump($array);
+```
+
+## JSON to Array
+
+You can convert a JSON file to an array using the following example.
+
+```php
+<?php
+
+use PhpCsv\Generator;
+
+require_once("./vendor/autoload.php");
+
+$object = new Generator();
+$object->importJson('data.json');
 $array = $object->getArray();
 
 var_dump($array);
