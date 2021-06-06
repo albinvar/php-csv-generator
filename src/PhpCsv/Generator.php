@@ -10,6 +10,8 @@ class Generator
     
     protected $csv;
     
+    protected $json;
+    
     protected $file;
     
     protected $delimiter = ',';
@@ -26,12 +28,12 @@ class Generator
         $this->parseCsv($data);
     }
     
-    public function setCsvFile(String $filename)
+    public function importCsv(String $filename)
     {
         $this->file = $filename;
         
         if (!file_exists($this->file)) {
-            throw new \Exception('Failed to read contents on file');
+            throw new \Exception('File not found');
         }
         
         $data = file_get_contents($this->file);
@@ -102,6 +104,7 @@ class Generator
         header('Content-Length: ' . filesize($filename));
         header('Pragma: public');
         flush();
+        readfile($filename);
         unlink($filename);
         
         return true;
@@ -117,10 +120,6 @@ class Generator
         foreach ($lines as $line) {
             $array[] = explode($this->delimiter, $line);
         }
-        
-        $header = $array[0];
-        unset($array[0]);
-        $array = ['header' => $header, 'body' => $array];
         
         $this->array = $array;
         
@@ -177,6 +176,31 @@ class Generator
                 return $this->downloadStream($fileName);
             }
         }
+    }
+    
+    public function importJson(String $filename)
+    {
+        $this->file = $filename;
+        
+        if (!file_exists($this->file)) {
+            throw new \Exception('File not found');
+        }
+        
+        $this->json = file_get_contents($this->file);
+        $this->parseJson();
+    }
+    
+    private function parseJson()
+    {
+        $array = json_decode($this->json, true);
+        
+        if (is_null($array)) {
+            throw new \Exception('Invalid JSON file.');
+        }
+      
+        $this->array = $array;
+        
+        return true;
     }
     
     private function jsonEncoder()
