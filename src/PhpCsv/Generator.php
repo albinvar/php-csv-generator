@@ -10,6 +10,8 @@ class Generator
     
     protected $csv;
     
+    protected $json;
+    
     protected $file;
     
     protected $delimiter = ',';
