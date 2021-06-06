@@ -163,7 +163,7 @@ class Generator
         if (isset($this->array)) {
             $data = $this->array;
         } else {
-        	$data = null;
+            $data = null;
         }
         $encoded = json_encode($data, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
         
