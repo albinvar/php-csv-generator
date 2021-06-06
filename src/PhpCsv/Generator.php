@@ -102,6 +102,7 @@ class Generator
         header('Content-Length: ' . filesize($filename));
         header('Pragma: public');
         flush();
+        readfile($filename);
         unlink($filename);
         
         return true;
