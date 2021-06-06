@@ -10,6 +10,8 @@ class Generator
     
     protected $csv;
     
+    protected $file;
+    
     protected $delimiter = ',';
     
     
@@ -92,8 +94,6 @@ class Generator
     
     private function downloadStream($filename)
     {
-        
-        //Define header information
         header('Content-Description: CSV File Download');
         header('Content-Type: application/csv');
         header("Cache-Control: no-cache, must-revalidate");
@@ -101,14 +101,8 @@ class Generator
         header('Content-Disposition: attachment; filename="'.basename($filename).'"');
         header('Content-Length: ' . filesize($filename));
         header('Pragma: public');
-
-        //Clear system output buffer
         flush();
-
-        //Read the size of the file
-        readfile($filename);
-        
-        unlink($fileName);
+        unlink($filename);
         
         return true;
     }
@@ -168,6 +162,8 @@ class Generator
     {
         if (isset($this->array)) {
             $data = $this->array;
+        } else {
+            $data = null;
         }
         $encoded = json_encode($data, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
         
