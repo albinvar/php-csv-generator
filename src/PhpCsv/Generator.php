@@ -157,7 +157,7 @@ class Generator
 	 * @param Bool $type [export type]
 	 * @return void
 	 */
-    public function exportCsv($fileName, $type=true)
+    public function exportCsv($fileName='data.csv', $type=true)
     {
         $file = fopen($fileName, "w") or die("Unable to open file!");
         fwrite($file, $this->csv);
