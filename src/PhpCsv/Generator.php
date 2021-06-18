@@ -159,7 +159,7 @@ class Generator
 	 */
     public function exportCsv($fileName='data.csv', $type=true)
     {
-        $file = fopen($fileName, "w") or die("Unable to open file!");
+        $file = fopen($fileName, "w") or throw new \Exception("Unable to open file!");
         fwrite($file, $this->csv);
         fclose($file);
         if ($type === true) {
