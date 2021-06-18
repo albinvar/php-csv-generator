@@ -1,47 +1,47 @@
 <?php
 
-	/**
-	*   Php Csv Generator
-	*   Author : Albin Varghese
-	*   Date : 18-06-2021
-	*/
+    /**
+    *   Php Csv Generator
+    *   Author : Albin Varghese
+    *   Date : 18-06-2021
+    */
 
 namespace PhpCsv;
 
 class Generator
 {
-   /**
-	*
-    * @var array
-    */
-	protected $array;
-	
     /**
-	*
+     *
+     * @var array
+     */
+    protected $array;
+    
+    /**
+    *
     * @var array
     */
     protected $columns;
     
     /**
-	*
+    *
     * @var string
     */
     protected $csv;
     
     /**
-	*
+    *
     * @var string
     */
     protected $json;
     
     /**
-	*
+    *
     * @var string
     */
     protected $file;
     
     /**
-	*
+    *
     * @var string
     */
     protected $delimiter = ',';
@@ -53,11 +53,11 @@ class Generator
     }
     
     /**
-	 * Set the csv string and parse data.
-	 *
-	 * @param String $data [Must be the csv string]
-	 * @return void
-	 */
+     * Set the csv string and parse data.
+     *
+     * @param String $data [Must be the csv string]
+     * @return void
+     */
     public function setCsv(String $data)
     {
         $this->csv = $data;
@@ -65,11 +65,11 @@ class Generator
     }
     
     /**
-	 * Set the csv file by using the path.
-	 *
-	 * @param String $path [path to the csv file]
-	 * @return void
-	 */
+     * Set the csv file by using the path.
+     *
+     * @param String $path [path to the csv file]
+     * @return void
+     */
     public function importCsv(String $path)
     {
         $this->file = $path;
@@ -84,12 +84,12 @@ class Generator
     
     
     /**
-	 * Set array to be processed for creating csv string.
-	 *
-	 * @param Array $array [data contents of the csv string]
-	 * @param Array $columns [headings for the csv data]
-	 * @return void
-	 */
+     * Set array to be processed for creating csv string.
+     *
+     * @param Array $array [data contents of the csv string]
+     * @param Array $columns [headings for the csv data]
+     * @return void
+     */
     public function setArray(array $array, array $columns=null)
     {
         $this->columns = $columns;
@@ -98,21 +98,21 @@ class Generator
     }
     
     /**
-	 * Parse and validate array set using setArray() method
-	 *
-	 * @return void
-	 */
+     * Parse and validate array set using setArray() method
+     *
+     * @return void
+     */
     public function parseArray()
     {
-    	//needs improvement.
+        //needs improvement.
         $this->validateArray();
     }
     
     /**
-	 * Creates csv string from array.
-	 *
-	 * @return bool
-	 */
+     * Creates csv string from array.
+     *
+     * @return bool
+     */
     public function makeCsv()
     {
         if (!isset($this->array) && !isset($this->columns)) {
@@ -137,10 +137,10 @@ class Generator
     }
     
     /**
-	 * Returns csv string prepared from makeCsv().
-	 *
-	 * @return string
-	 */
+     * Returns csv string prepared from makeCsv().
+     *
+     * @return string
+     */
     public function getCsv()
     {
         if (!isset($this->csv)) {
@@ -151,12 +151,12 @@ class Generator
     }
     
     /**
-	 * Converts csv string to file and Download it or store in a specific location.
-	 *
-	 * @param String $fileName [filename to be used for the exported file]
-	 * @param Bool $type [export type]
-	 * @return void
-	 */
+     * Converts csv string to file and Download it or store in a specific location.
+     *
+     * @param String $fileName [filename to be used for the exported file]
+     * @param Bool $type [export type]
+     * @return void
+     */
     public function exportCsv($fileName='data.csv', $type=true)
     {
         $file = fopen($fileName, "w") or throw new \Exception("Unable to open file!");
@@ -168,11 +168,11 @@ class Generator
     }
     
     /**
-	 * Stream exported file to users browser.
-	 *
-	 * @param String $fileName [filename to be used for the exported file]
-	 * @return bool
-	 */
+     * Stream exported file to users browser.
+     *
+     * @param String $fileName [filename to be used for the exported file]
+     * @return bool
+     */
     private function downloadStream($filename)
     {
         header('Content-Description: CSV File Download');
@@ -190,11 +190,11 @@ class Generator
     }
     
     /**
-	 * Converts csv string to php array.
-	 *
-	 * @param String $fileName [filename to be used for the exported file]
-	 * @return bool
-	 */
+     * Converts csv string to php array.
+     *
+     * @param String $fileName [filename to be used for the exported file]
+     * @return bool
+     */
     private function parseCsv($data)
     {
         $delimiterBreak = PHP_EOL;
@@ -212,20 +212,20 @@ class Generator
     }
     
     /**
-	 * Returns created array.
-	 *
-	 * @return array
-	 */
+     * Returns created array.
+     *
+     * @return array
+     */
     public function getArray()
     {
         return $this->array;
     }
     
     /**
-	 * Validate's array to be in the correct form.
-	 *
-	 * @return bool
-	 */
+     * Validate's array to be in the correct form.
+     *
+     * @return bool
+     */
     private function validateArray()
     {
         //check if property columns is null.
@@ -254,12 +254,12 @@ class Generator
     
     
     /**
-	 * Converts php array to json string.
-	 *
-	 * @param String $fileName [filename to be used for the exported file]
-	 * @param Bool $type [export type]
-	 * @return string
-	 */
+     * Converts php array to json string.
+     *
+     * @param String $fileName [filename to be used for the exported file]
+     * @param Bool $type [export type]
+     * @return string
+     */
     public function exportJson($fileName=null, $type=true)
     {
         if (isset($this->array)) {
@@ -282,11 +282,11 @@ class Generator
     }
     
     /**
-	 * Import JSON file and parse data from json string.
-	 *
-	 * @param String $fileName [filename to be imported for convertion]
-	 * @return void
-	 */
+     * Import JSON file and parse data from json string.
+     *
+     * @param String $fileName [filename to be imported for convertion]
+     * @return void
+     */
     public function importJson(String $filename)
     {
         $this->file = $filename;
@@ -300,10 +300,10 @@ class Generator
     }
     
     /**
-	 * Parses JSON and Converts it to an array.
-	 *
-	 * @return bool
-	 */
+     * Parses JSON and Converts it to an array.
+     *
+     * @return bool
+     */
     private function parseJson()
     {
         $array = json_decode($this->json, true);
@@ -318,10 +318,10 @@ class Generator
     }
     
     /**
-	 * Converts array to JSON.
-	 *
-	 * @return string
-	 */
+     * Converts array to JSON.
+     *
+     * @return string
+     */
     private function jsonEncoder()
     {
         $encoded = json_encode($this->array);
@@ -329,10 +329,10 @@ class Generator
     }
     
     /**
-	 * Converts JSON to array.
-	 *
-	 * @return array
-	 */
+     * Converts JSON to array.
+     *
+     * @return array
+     */
     private function jsonDecoder()
     {
         $decoded = json_decode($this->array);
