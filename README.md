@@ -1,6 +1,7 @@
 <h1 align="center"> Php-Csv Generator</h1> 
 
 <p align="center">
+<a href="https://github.com/albinvar/php-csv-generator/actions/workflows/php.yml"><img src="https://github.com/albinvar/php-csv-generator/actions/workflows/php.yml/badge.svg?branch=main"></a>
 <img src="https://img.shields.io/packagist/v/albinvar/php-csv-generator?label=version">
 <img src="https://poser.pugx.org/albinvar/php-csv-generator/downloads">
 <img src="https://img.shields.io/github/repo-size/albinvar/php-csv-generator">
