@@ -45,11 +45,46 @@ class Generator
     * @var string
     */
     protected $delimiter = ',';
-    
-    
+
+    /**
+     * @var string
+     */
+    protected $path;
+
     public function __construct()
     {
         //
+    }
+
+    /**
+     * @param String $data [Delimiter for the CSV file.]
+     * @return void
+     */
+    public function setDelimiter(String $data)
+    {
+        $this->delimiter=$data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDelimiter():string {
+        return $this->delimiter;
+    }
+
+    /**
+     * @param $data [path to where to write file]
+     * @return void
+     */
+    public function setPath($data) {
+        $this->path=$data;
+    }
+
+    /**
+     * @return string [path to where to write file]
+     */
+    public function getPath() {
+        return $this->path;
     }
     
     /**
@@ -159,7 +194,7 @@ class Generator
      */
     public function exportCsv($fileName='data.csv', $type=true)
     {
-        $file = fopen($fileName, "w") or throw new \Exception("Unable to open file!");
+        $file = fopen($this->path.$fileName, "w") or throw new \Exception("Unable to open file!");
         fwrite($file, $this->csv);
         fclose($file);
         if ($type === true) {
@@ -179,12 +214,12 @@ class Generator
         header('Content-Type: application/csv');
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: 0");
-        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
-        header('Content-Length: ' . filesize($filename));
+        header('Content-Disposition: attachment; filename="'.basename($this->path.$filename).'"');
+        header('Content-Length: ' . filesize($this->path.$filename));
         header('Pragma: public');
         flush();
-        readfile($filename);
-        unlink($filename);
+        readfile($this->path.$filename);
+        unlink($this->path.$filename);
         
         return true;
     }
