@@ -3,6 +3,8 @@ name: PHP Composer
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -11,11 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set up PHP 7.2
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 7.2
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
